@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block sf %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static 'style_date.css' %}" media="all" />
+{% endblock %}
+
+
+{% block title %}Kalender{% endblock %}
+
+{% block body %}
+<body>
+{% endblock %}
+
+{% block content %}
+<div class="container">{% if prev_month != -1 %}
+	<div class="pm"><a href="/tolk/kalender/{{ prev_month }}/{{ prev_year }}/" class="prevMonth"> <<<  </a></div>{% endif %}
+<div class="dt">
+	<h2 class="dateHeader" align="center">{{ month_name }} {{ year }}</h2></div>
+<div class="nm"> <a href="/tolk/kalender/{{ next_month }}/{{ next_year }}/" class="nextMonth">>>></a></div>
+</div>
+<div class="cal">
+	<table class="calender">
+		<thead class="days"><tr>
+			<th>Man</th>
+			<th>Tirs</th>
+			<th>Ons</th>
+			<th>Tors</th>
+			<th>Fre</th>
+			<th>Lør</th>
+			<th>Søn</th>
+	</tr></thead>
+
+
+			{% for week in weeks %}
+			<tr>
+				{% for day in week %}
+				{% if day != 0 %}
+				<td {% if day != 0 %} onMouseOver="this.bgColor='#eeeeee';" onMouseOut="this.bgColor='white';" {% endif %} ><a href="/tolk/kalender/dag/{{ year }}/{{ month_name }}/{{ day }}/"> {{ day }} </td></a>
+				{% else %}
+				<td> </td>
+				{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</tr>
+
+	</table>
+</div>
+
+
+<a href="/tolk/logout">Logout</a>
+
+
+
+{% endblock %}
